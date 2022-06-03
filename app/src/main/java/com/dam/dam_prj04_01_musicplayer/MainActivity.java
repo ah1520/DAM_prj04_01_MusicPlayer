@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     /** Ajout automatique de la lecture audio */
@@ -67,6 +70,44 @@ public class MainActivity extends AppCompatActivity {
     } //End Volume method
 
 
+    private void position() {
+        //Association de la seekabr au Java
+        SeekBar sbPosition = findViewById(R.id.sbPosition);
+
+        //Definir la valeur Max
+        sbPosition.setMax(mediaPlayer.getDuration());
+
+        //Part 1 gestion du déplacement du curseur par l'utilisateur
+        sbPosition.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.i(TAG, "position dans le morceau : " + Integer.toString(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                pause(sbPosition);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(sbPosition.getProgress());
+                play(sbPosition);
+            }
+
+        });
+
+        // PART 02, Lors de la lecture de la musique, gestion du déplacement du curseur par l'application
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                //Déplacement automatique
+                sbPosition.setProgress(mediaPlayer.getCurrentPosition());
+            }
+        }, 0, 100);  //Déplacement tous les 300 ms sans délai
+
+    }
+
     /******************* Cycle de vie *****************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.sound);
 
         volume();
+        position();
     }
 
     @Override
