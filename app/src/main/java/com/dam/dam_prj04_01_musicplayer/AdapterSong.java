@@ -2,6 +2,8 @@ package com.dam.dam_prj04_01_musicplayer;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,8 +28,13 @@ public class AdapterSong extends RecyclerView.Adapter<AdapterSong.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView title, artist;
+        ImageView cover;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            title = itemView.findViewById(R.id.tvTitle);
+
         }
     }
 }
