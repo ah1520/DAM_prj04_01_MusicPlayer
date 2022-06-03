@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "sur pause");
     }
 
-    public void volume(){
+    /*public void volume(){
         //Associatyion de la seekabr au Java
         SeekBar sbVolume = findViewById(R.id.sbVolume);
 
@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    } //End Volume method
-
+    } //End Volume method */
 
     private void position() {
         //Association de la seekabr au Java
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(this, R.raw.sound);
 
-        volume();
+        //volume();
         position();
     }
 

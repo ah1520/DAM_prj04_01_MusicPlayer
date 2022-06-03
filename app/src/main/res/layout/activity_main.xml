@@ -4,43 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvSongTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tvSongTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#EFEDED"
+        app:layout_constraintBottom_toTopOf="@+id/llPrincipal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Titre de la chanson en cours" />
 
     <LinearLayout
         android:id="@+id/llPrincipal"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/IIButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btnPlayer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="play"
-                app:srcCompat="@android:drawable/ic_media_play" />
-
-            <ImageButton
-                android:id="@+id/btnPause"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="pause"
-                app:srcCompat="@android:drawable/ic_media_pause" />
-
-        </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/llPosition"
@@ -51,11 +50,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvPosition"
-                android:layout_width="60dp"
+                android:id="@+id/tvCurrentPos"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="Position" />
+                android:text="00:00"
+                android:textColor="#F1EDED" />
 
             <SeekBar
                 android:id="@+id/sbPosition"
@@ -63,11 +63,48 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scrollbarSize="4dp"
-                android:thumbTint="#A31D1D"
-                android:thumbTintMode="screen" />
+                android:theme="@style/seekBar"
+                android:thumbTintMode="src_in" />
+
+            <TextView
+                android:id="@+id/tvTotalDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="00:00"
+                android:textColor="#F6F3F3" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/IIButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_btnPrev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_previous_24_w" />
+
+            <ImageView
+                android:id="@+id/iv_btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_play_48_w" />
+
+            <ImageView
+                android:id="@+id/iv_btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_next_24_w" />
+        </LinearLayout>
+
+        <!--LinearLayout
             android:id="@+id/IIVolume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +126,7 @@
                 android:layout_weight="1"
                 android:thumbTintMode="src_over" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 
